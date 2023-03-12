@@ -55,6 +55,16 @@ class Bubble_Text
 
         # This will create a white background bubble by stamping the text in a circle.
         white_bubble = Gosu.render(padding + text_width.to_i, padding + text_height.to_i) do
+            # Using the outer_color text stamp in a circle.
+            # Polar Coordinates trigonometry Algorithm
+            # for index in (-Math::PI..Math::PI).step(0.1)
+            #     x = (Math.cos(index) * radius) + radius
+            #     y = (Math.sin(index) * radius) + radius
+            #     font.draw_text(text, x, y, 0, 1, 1, white_color, mode = :additive)
+            # end
+
+            # Bresenham's Circle Drawing Algorithm
+            # https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
             x = 0
             y = radius
             d = 3 - 2 * radius
