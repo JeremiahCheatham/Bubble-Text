@@ -1,5 +1,5 @@
 import pygame
-# import math
+import math
 
 pygame.init()
 
@@ -37,9 +37,10 @@ class Bubble_Text:
         self.surface.fill((0, 0, 0, 0))
 
         # Using the outer_color text stamp in a circle.
-        # for index in range(-180, 180):
-        #     x = (math.cos(index) * radius) + radius
-        #     y = (math.sin(index) * radius) + radius
+        # Polar Coordinates trigonometry Algorithm
+        # for index in range(0, int(math.pi * 20) ):
+        #     x = (math.cos(index / 10) * radius) + radius
+        #     y = (math.sin(index / 10) * radius) + radius
         #     self.surface.blit(text_surf, (x, y))
 
         # Bresenham's Circle Drawing Algorithm
