@@ -16,12 +16,10 @@ clock = pygame.time.Clock()
 
 class Bubble_Text:
     def __init__(self, text, text_size, radius, outer_color, center_color):
-        self.text = text
-        self.center_color = center_color
         self.x_vel = 2
         self.y_vel = 2
 
-        # create font based on loaded font and size.
+        # create font based on a true type font and size.
         font = pygame.font.Font(GAME_FONT, text_size)
 
         # Create initial Text to calculate target surface size.
@@ -38,11 +36,11 @@ class Bubble_Text:
         # Back sure the surface is blank and transparent.
         self.surface.fill((0, 0, 0, 0))
 
-        # # Using the outer_color text stamp in a circle.
+        # Using the outer_color text stamp in a circle.
         # for index in range(-180, 180):
         #     x = (math.cos(index) * radius) + radius
         #     y = (math.sin(index) * radius) + radius
-        #     self.surface.blit(text, (x, y))
+        #     self.surface.blit(text_surf, (x, y))
 
         # Bresenham's Circle Drawing Algorithm
         # https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
