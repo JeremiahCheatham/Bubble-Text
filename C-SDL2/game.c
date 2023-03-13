@@ -24,6 +24,7 @@ void game_free(struct Game *this) {
 
 bool game_run(struct Game *this) {
 
+    // The Outer and Inter Bubble colors.
     SDL_Color outer_color = {200, 100, 150, 255};
     SDL_Color center_color = {50, 50, 150, 255};
 

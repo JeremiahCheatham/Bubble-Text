@@ -9,7 +9,7 @@
 #include <SDL2/SDL_ttf.h>
 
 // Define directives for constants.
-#define MY_SDL_FLAGS (SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO)
+#define MY_SDL_FLAGS (SDL_INIT_VIDEO|SDL_INIT_TIMER)
 #define TITLE "Bubble Text"
 #define WIDTH 1280
 #define HEIGHT 720
