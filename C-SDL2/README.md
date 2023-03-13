@@ -6,7 +6,7 @@ Simple Demo showing how to make Bubble using both Polar Coordinates trigonometry
 # Build
 To build the bubble-text binary you will need all required build tools needed to compile via Makefile and gcc. You will also need SDL2 and ttf both the libraries and headerfiles. This was created in linux where the SDL2 headerfiles are in the SDL2 folder. In windows i believe the "SDL2/" may need to be removed.
 
-# ArchLinux instructions.
+## ArchLinux instructions.
 
     sudo pacman -S --needed base-devel
     sudo pacman -S --needed sdl2 sdl2_ttf
