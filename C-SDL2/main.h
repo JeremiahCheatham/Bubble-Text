@@ -10,7 +10,7 @@
 
 // Define directives for constants.
 #define MY_SDL_FLAGS (SDL_INIT_VIDEO|SDL_INIT_TIMER|SDL_INIT_AUDIO)
-#define TITLE "Don't Eat the Yellow Snow!"
+#define TITLE "Bubble Text"
 #define WIDTH 1280
 #define HEIGHT 720
 #define FPS 60

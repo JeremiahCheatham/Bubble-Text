@@ -1,7 +1,6 @@
 CC      = gcc
-CFLAGS  != pkg-config --cflags sdl2 SDL2_ttf
-CFLAGS  += -std=c99 -ggdb3 -Wall -Wextra -Wwrite-strings
-LDLIBS  != pkg-config --libs sdl2 SDL2_ttf
+CFLAGS  = `pkg-config --cflags sdl2 SDL2_ttf` -std=c99 -ggdb3 -Wall -Wextra -Wwrite-strings
+LDLIBS  = `pkg-config --libs sdl2 SDL2_ttf` -lm
 TARGET  = bubble-text
 
 SRCS    = $(wildcard *.c)

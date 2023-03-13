@@ -12,7 +12,7 @@ struct Bubble_Text {
     int vel_y;
 };
 
-struct Bubble_Text* bubble_text_new(SDL_Renderer *renderer, const char* text, int text_size, int radius, SDL_Color outer_color, SDL_Color center_color);
+struct Bubble_Text* bubble_text_new(SDL_Renderer *renderer, const char* text, int text_size, float radius, SDL_Color outer_color, SDL_Color center_color);
 void bubble_text_update(struct Bubble_Text *this);
 bool bubble_text_draw(struct Bubble_Text *this);
 void bubble_text_free(struct Bubble_Text *this);
