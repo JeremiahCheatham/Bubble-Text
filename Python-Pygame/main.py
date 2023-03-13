@@ -1,5 +1,7 @@
 import pygame
-import math
+
+# For use with Polar Coordinates trigonometry Algorithm
+# import math
 
 pygame.init()
 
@@ -36,18 +38,19 @@ class Bubble_Text:
         # Back sure the surface is blank and transparent.
         self.surface.fill((0, 0, 0, 0))
 
-        # Using the outer_color text stamp in a circle.
+        # Using the outer_color text to stamp in a circle.
+
         # Polar Coordinates trigonometry Algorithm
-        # for index in range(0, int(math.pi * 20) ):
-        #     x = (math.cos(index / 10) * radius) + radius
-        #     y = (math.sin(index / 10) * radius) + radius
+        # for index in range(0, int(math.pi * radius) ):
+        #     x = (math.cos(index / (radius / 2)) * radius) + radius
+        #     y = (math.sin(index / (radius / 2)) * radius) + radius
         #     self.surface.blit(text_surf, (x, y))
 
         # Bresenham's Circle Drawing Algorithm
         # https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
         x = 0
         y = radius
-        d = 3 - 2 * radius
+        d = radius
         while (y >= x):
             self.surface.blit(text_surf, (radius + x, radius + y))
             self.surface.blit(text_surf, (radius - x, radius + y))
