@@ -57,7 +57,7 @@ class Bubble_Text
         white_bubble = Gosu.render(padding + text_width.to_i, padding + text_height.to_i) do
             # Using the outer_color text stamp in a circle.
             # Polar Coordinates trigonometry Algorithm
-            # for index in (-Math::PI..Math::PI).step(0.1)
+            # for index in (-Math::PI..Math::PI).step(1.0 / radius)
             #     x = (Math.cos(index) * radius) + radius
             #     y = (Math.sin(index) * radius) + radius
             #     font.draw_text(text, x, y, 0, 1, 1, white_color, mode = :additive)
@@ -67,7 +67,7 @@ class Bubble_Text
             # https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
             x = 0
             y = radius
-            d = 3 - 2 * radius
+            d = radius
             while (y >= x)
                 font.draw_text(text, radius + x, radius + y, 0, 1, 1, white_color, mode = :additive)
                 font.draw_text(text, radius - x, radius + y, 0, 1, 1, white_color, mode = :additive)
