@@ -35,7 +35,7 @@ class Bubble_Text:
         self.rect = self.surface.get_rect()
         self.rect.x, self.rect.y = 0, 0
 
-        # Back sure the surface is blank and transparent.
+        # Make sure the surface is blank and transparent.
         self.surface.fill((0, 0, 0, 0))
 
         # Using the outer_color text to stamp in a circle.
