@@ -81,6 +81,15 @@ blit textSurf targetSurf x y = do
     void $ SDL.surfaceBlit textSurf Nothing targetSurf $ Just $ SDL.P (SDL.V2 x y)
 
 
+-- polarCoordinates :: SDL.Surface -> SDL.Surface -> Float -> IO ()
+-- polarCoordinates textSurf targetSurf radius = do
+--     let numPoints = round (pi * radius) :: Int
+--     forM_ [0..numPoints] $ \index -> do
+--         let x = (cos (fromIntegral index / (radius / 2)) * radius) + radius
+--             y = (sin (fromIntegral index / (radius / 2)) * radius) + radius
+--         blit textSurf targetSurf (round x) (round y)
+
+
 bresenhamsAlgorithm :: SDL.Surface -> SDL.Surface -> CInt -> IO ()
 bresenhamsAlgorithm textSurf targetSurf radius = loop 0 radius radius
   where loop x y d
@@ -110,6 +119,7 @@ createBubbleText renderer msg size radius outerColor centerColor = do
     let padding = radius * 2
     targetSurf <- SDL.createRGBSurface (SDL.V2(width + padding) (height + padding)) SDL.RGBA8888
     bresenhamsAlgorithm outerSurf targetSurf radius
+    -- polarCoordinates outerSurf targetSurf (fromIntegral radius)
     centerSurf <- SDL.Font.blended font centerColor text
     _ <- SDL.surfaceBlit centerSurf Nothing targetSurf $ Just $ SDL.P (SDL.V2 radius radius)
     dim <- SDL.surfaceDimensions targetSurf
