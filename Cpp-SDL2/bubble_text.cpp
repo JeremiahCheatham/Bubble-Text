@@ -43,24 +43,9 @@ BubbleText::BubbleText(SDL_Renderer* renderer, const char* text, int text_size, 
     // https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
     int x = 0;
     int y = radius;
-    int d = radius;
+    int d = 3 - 2 * radius;
+    this->blit_symmetric_points(text_surf, target_surf, radius, x, y);
     while (y >= x) {
-        this->rect.x = radius + x; this->rect.y = radius + y;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
-        this->rect.x = radius + x; this->rect.y = radius - y;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
-        this->rect.x = radius - x; this->rect.y = radius + y;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
-        this->rect.x = radius - x; this->rect.y = radius - y;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
-        this->rect.x = radius + y; this->rect.y = radius + x;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
-        this->rect.x = radius + y; this->rect.y = radius - x;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
-        this->rect.x = radius - y; this->rect.y = radius + x;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
-        this->rect.x = radius - y; this->rect.y = radius - x;
-        SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
         x++;
         if (d > 0) {
             y--;
@@ -68,6 +53,7 @@ BubbleText::BubbleText(SDL_Renderer* renderer, const char* text, int text_size, 
         } else {
             d = d + 4 * x + 6;
         }
+        this->blit_symmetric_points(text_surf, target_surf, radius, x, y);
     }
 
     // Free text_surf before using it to create center text.
@@ -105,6 +91,25 @@ BubbleText::BubbleText(SDL_Renderer* renderer, const char* text, int text_size, 
     SDL_FreeSurface(text_surf);
     SDL_FreeSurface(target_surf);
     TTF_CloseFont(font);
+}
+
+void BubbleText::blit_symmetric_points(SDL_Surface *text_surf, SDL_Surface *target_surf, int radius, int x, int y) {
+    this->rect.x = radius + x; this->rect.y = radius + y;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
+    this->rect.x = radius + x; this->rect.y = radius - y;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
+    this->rect.x = radius - x; this->rect.y = radius + y;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
+    this->rect.x = radius - x; this->rect.y = radius - y;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
+    this->rect.x = radius + y; this->rect.y = radius + x;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
+    this->rect.x = radius + y; this->rect.y = radius - x;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
+    this->rect.x = radius - y; this->rect.y = radius + x;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
+    this->rect.x = radius - y; this->rect.y = radius - x;
+    SDL_BlitSurface(text_surf, NULL, target_surf, &this->rect);
 }
 
 void BubbleText::update() {

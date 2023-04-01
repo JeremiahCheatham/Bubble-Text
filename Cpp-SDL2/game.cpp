@@ -49,7 +49,7 @@ void Game::run() {
     // The Outer and Inter Bubble colors.
     SDL_Color outer_color = {200, 100, 150, 255};
     SDL_Color center_color = {50, 50, 150, 255};
-    BubbleText bubbleText(this->renderer, "Bubble Text", 100, 10, outer_color, center_color);
+    BubbleText bubbleText(this->renderer, "Bubble Text", 100, 20, outer_color, center_color);
 
     Fps fps(60);
 
