@@ -50,8 +50,21 @@ class Bubble_Text:
         # https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
         x = 0
         y = radius
-        d = radius
+        d = 3 - 2 * radius
+        self.blit_symmetric_points(text_surf, radius, x, y)
         while (y >= x):
+            x += 1
+            if d > 0:
+                y -= 1
+                d = d + 4 * (x - y) + 10
+            else:
+                d = d + 4 * x + 6
+            self.blit_symmetric_points(text_surf, radius, x, y)
+
+        # Using the center_color stamp the text in the center.
+        self.surface.blit(font.render(text, True, center_color), (radius, radius))
+
+    def blit_symmetric_points(self, text_surf, radius, x, y):
             self.surface.blit(text_surf, (radius + x, radius + y))
             self.surface.blit(text_surf, (radius - x, radius + y))
             self.surface.blit(text_surf, (radius + x, radius - y))
@@ -60,15 +73,6 @@ class Bubble_Text:
             self.surface.blit(text_surf, (radius - y, radius + x))
             self.surface.blit(text_surf, (radius + y, radius - x))
             self.surface.blit(text_surf, (radius - y, radius - x))
-            x += 1
-            if d > 0:
-                y -= 1
-                d = d + 4 * (x - y) + 10
-            else:
-                d = d + 4 * x + 6
-
-        # Using the center_color stamp the text in the center.
-        self.surface.blit(font.render(text, True, center_color), (radius, radius))
 
     def update(self):
         # Move the text by adding x and y velocity, bouce off walls.
@@ -110,7 +114,7 @@ def draw():
     pygame.display.flip()
 
 # Creat a bubble text with text size, thickness, outer color and inner color.
-bubble_text = Bubble_Text("Bubble Text", 100, 10, (200, 100, 150), (50, 50, 150))
+bubble_text = Bubble_Text("Bubble Text", 100, 20, (200, 100, 150), (50, 50, 150))
 
 
 while running:
