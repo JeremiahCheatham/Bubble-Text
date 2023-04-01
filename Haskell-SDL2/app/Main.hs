@@ -50,7 +50,7 @@ createGameData :: SDL.Renderer -> IO GameData
 createGameData renderer = do
     let outerColor = (SDL.V4 200 100 150 255)
         centerColor = (SDL.V4 50 50 150 255)
-    (bubbleText, bubbleTextDim) <- createBubbleText renderer "Bubble Text" 100 10 outerColor centerColor
+    (bubbleText, bubbleTextDim) <- createBubbleText renderer "Bubble Text" 100 20 outerColor centerColor
     return GameData 
         { gameRenderer = renderer
         , gameBubbleText = bubbleText
@@ -81,6 +81,7 @@ blit textSurf targetSurf x y = do
     void $ SDL.surfaceBlit textSurf Nothing targetSurf $ Just $ SDL.P (SDL.V2 x y)
 
 
+-- Polar Coordinates trigonometry Algorithm
 -- polarCoordinates :: SDL.Surface -> SDL.Surface -> Float -> IO ()
 -- polarCoordinates textSurf targetSurf radius = do
 --     let numPoints = round (pi * radius) :: Int
@@ -90,24 +91,36 @@ blit textSurf targetSurf x y = do
 --         blit textSurf targetSurf (round x) (round y)
 
 
+-- Bresenham's Circle Drawing Algorithm
+-- https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
 bresenhamsAlgorithm :: SDL.Surface -> SDL.Surface -> CInt -> IO ()
-bresenhamsAlgorithm textSurf targetSurf radius = loop 0 radius radius
-  where loop x y d
-          | y < x     = return ()
-          | otherwise = do
-              blit textSurf targetSurf (radius + x) (radius + y)
-              blit textSurf targetSurf (radius + x) (radius - y)
-              blit textSurf targetSurf (radius - x) (radius + y)
-              blit textSurf targetSurf (radius - x) (radius - y)
-              blit textSurf targetSurf (radius + y) (radius + x)
-              blit textSurf targetSurf (radius + y) (radius - x)
-              blit textSurf targetSurf (radius - y) (radius + x)
-              blit textSurf targetSurf (radius - y) (radius - x)
-              let x' = x + 1
-              let (y', d') = if d > 0
-                              then (y - 1, d + 4 * (x' - y) + 10)
-                              else (y, d + 4 * x' + 6)
-              loop x' y' d'
+bresenhamsAlgorithm textSurf targetSurf radius = do
+    let x = 0
+        y = radius
+        d = 3 - 2 * radius
+    drawSymmetricPoints textSurf targetSurf radius x y
+    loop x y d
+    where loop x y d
+            | y < x     = return ()
+            | otherwise = do
+                let x' = x + 1
+                let (y', d') = if d > 0
+                    then (y - 1, d + 4 * (x' - y) + 10)
+                    else (y, d + 4 * x' + 6)
+                drawSymmetricPoints textSurf targetSurf radius x y
+                loop x' y' d'
+
+
+drawSymmetricPoints :: SDL.Surface -> SDL.Surface -> CInt -> CInt -> CInt -> IO ()
+drawSymmetricPoints textSurf targetSurf radius x y = do
+    blit textSurf targetSurf (radius + x) (radius + y)
+    blit textSurf targetSurf (radius + x) (radius - y)
+    blit textSurf targetSurf (radius - x) (radius + y)
+    blit textSurf targetSurf (radius - x) (radius - y)
+    blit textSurf targetSurf (radius + y) (radius + x)
+    blit textSurf targetSurf (radius + y) (radius - x)
+    blit textSurf targetSurf (radius - y) (radius + x)
+    blit textSurf targetSurf (radius - y) (radius - x)
 
 
 createBubbleText :: SDL.Renderer -> String -> Int -> CInt -> SDL.Font.Color -> SDL.Font.Color -> IO (SDL.Texture, SDL.V2 CInt)
@@ -118,6 +131,7 @@ createBubbleText renderer msg size radius outerColor centerColor = do
     (SDL.V2 width height) <- SDL.surfaceDimensions outerSurf
     let padding = radius * 2
     targetSurf <- SDL.createRGBSurface (SDL.V2(width + padding) (height + padding)) SDL.RGBA8888
+    -- Using the outerColor text to stamp in a circle.
     bresenhamsAlgorithm outerSurf targetSurf radius
     -- polarCoordinates outerSurf targetSurf (fromIntegral radius)
     centerSurf <- SDL.Font.blended font centerColor text
