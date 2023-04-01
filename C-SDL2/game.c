@@ -28,7 +28,7 @@ bool game_run(struct Game *this) {
     SDL_Color outer_color = {200, 100, 150, 255};
     SDL_Color center_color = {50, 50, 150, 255};
 
-    this->bubble_text = bubble_text_new(this->renderer, "Bubble Text", 100, 10, outer_color, center_color);
+    this->bubble_text = bubble_text_new(this->renderer, "Bubble Text", 100, 20, outer_color, center_color);
     if (!this->bubble_text || this->bubble_text->error) {
         return false;
     }

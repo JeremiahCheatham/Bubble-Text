@@ -16,8 +16,8 @@ struct Bubble_Text* bubble_text_new(SDL_Renderer *renderer, const char* text, in
 
     this->renderer = renderer;
     this->image = NULL;
-    this->rect.x = 10;
-    this->rect.y = 10;
+    this->rect.x = 0;
+    this->rect.y = 0;
     this->error = true;
     this->vel_x = 2;
     this->vel_y = 2;
@@ -57,16 +57,9 @@ struct Bubble_Text* bubble_text_new(SDL_Renderer *renderer, const char* text, in
     // https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
     int x = 0;
     int y = radius;
-    int d = radius;
+    int d = 3 - 2 * radius;
+    blit_symmetric_points(text_surf, target_surf, radius, x, y);
     while (y >= x) {
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + x, radius + y, text_surf->w, text_surf->h });
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + x, radius - y, text_surf->w, text_surf->h });
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - x, radius + y, text_surf->w, text_surf->h });
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - x, radius - y, text_surf->w, text_surf->h });
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + y, radius + x, text_surf->w, text_surf->h });
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + y, radius - x, text_surf->w, text_surf->h });
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - y, radius + x, text_surf->w, text_surf->h });
-        SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - y, radius - x, text_surf->w, text_surf->h });
         x++;
         if (d > 0) {
             y--;
@@ -74,6 +67,7 @@ struct Bubble_Text* bubble_text_new(SDL_Renderer *renderer, const char* text, in
         } else {
             d = d + 4 * x + 6;
         }
+        blit_symmetric_points(text_surf, target_surf, radius, x, y);
     }
 
     // Free text_surf before using it to create center text.
@@ -110,6 +104,17 @@ struct Bubble_Text* bubble_text_new(SDL_Renderer *renderer, const char* text, in
 
     this->error = false;
     return this;
+}
+
+void blit_symmetric_points(SDL_Surface *text_surf, SDL_Surface *target_surf, int radius, int x, int y) {
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + x, radius + y, text_surf->w, text_surf->h });
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + x, radius - y, text_surf->w, text_surf->h });
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - x, radius + y, text_surf->w, text_surf->h });
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - x, radius - y, text_surf->w, text_surf->h });
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + y, radius + x, text_surf->w, text_surf->h });
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius + y, radius - x, text_surf->w, text_surf->h });
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - y, radius + x, text_surf->w, text_surf->h });
+    SDL_BlitSurface(text_surf, NULL, target_surf, &(SDL_Rect){ radius - y, radius - x, text_surf->w, text_surf->h });
 }
 
 void bubble_text_update(struct Bubble_Text *this) {
