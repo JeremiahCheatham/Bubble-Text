@@ -14,7 +14,7 @@ class Main < Gosu::Window
         @outer_color = Gosu::Color.new(255, 200, 100, 150)
         @center_color = Gosu::Color.new(255, 50, 50, 150)
 
-        @bubble_text = Bubble_Text.new("Bubble Text", 100, 10, @outer_color, @center_color)
+        @bubble_text = Bubble_Text.new("Bubble Text", 100, 20, @outer_color, @center_color)
     end
 
     def update()
@@ -67,16 +67,9 @@ class Bubble_Text
             # https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
             x = 0
             y = radius
-            d = radius
+            d = 3 - 2 * radius
+            self.blit_symmetric_points(font, text, white_color, radius, x, y)
             while (y >= x)
-                font.draw_text(text, radius + x, radius + y, 0, 1, 1, white_color, mode = :additive)
-                font.draw_text(text, radius - x, radius + y, 0, 1, 1, white_color, mode = :additive)
-                font.draw_text(text, radius + x, radius - y, 0, 1, 1, white_color, mode = :additive)
-                font.draw_text(text, radius - x, radius - y, 0, 1, 1, white_color, mode = :additive)
-                font.draw_text(text, radius + y, radius + x, 0, 1, 1, white_color, mode = :additive)
-                font.draw_text(text, radius - y, radius + x, 0, 1, 1, white_color, mode = :additive)
-                font.draw_text(text, radius + y, radius - x, 0, 1, 1, white_color, mode = :additive)
-                font.draw_text(text, radius - y, radius - x, 0, 1, 1, white_color, mode = :additive)
                 x += 1
                 if d > 0
                     y -= 1
@@ -84,6 +77,7 @@ class Bubble_Text
                 else
                     d = d + 4 * x + 6
                 end
+                self.blit_symmetric_points(font, text, white_color, radius, x, y)
             end
         end
 
@@ -92,6 +86,17 @@ class Bubble_Text
             white_bubble.draw(0, 0, 0, 1, 1, outer_color)
             font.draw_text(text, radius, radius, 0, 1, 1, center_color)
         end
+    end
+
+    def blit_symmetric_points(font, text, white_color, radius, x, y)
+        font.draw_text(text, radius + x, radius + y, 0, 1, 1, white_color, mode = :additive)
+        font.draw_text(text, radius - x, radius + y, 0, 1, 1, white_color, mode = :additive)
+        font.draw_text(text, radius + x, radius - y, 0, 1, 1, white_color, mode = :additive)
+        font.draw_text(text, radius - x, radius - y, 0, 1, 1, white_color, mode = :additive)
+        font.draw_text(text, radius + y, radius + x, 0, 1, 1, white_color, mode = :additive)
+        font.draw_text(text, radius - y, radius + x, 0, 1, 1, white_color, mode = :additive)
+        font.draw_text(text, radius + y, radius - x, 0, 1, 1, white_color, mode = :additive)
+        font.draw_text(text, radius - y, radius - x, 0, 1, 1, white_color, mode = :additive)
     end
 
     def update()
