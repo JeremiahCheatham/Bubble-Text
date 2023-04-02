@@ -65,14 +65,14 @@ class Bubble_Text:
         self.surface.blit(font.render(text, True, center_color), (radius, radius))
 
     def blit_symmetric_points(self, text_surf, radius, x, y):
-            self.surface.blit(text_surf, (radius + x, radius + y))
-            self.surface.blit(text_surf, (radius - x, radius + y))
-            self.surface.blit(text_surf, (radius + x, radius - y))
-            self.surface.blit(text_surf, (radius - x, radius - y))
-            self.surface.blit(text_surf, (radius + y, radius + x))
-            self.surface.blit(text_surf, (radius - y, radius + x))
-            self.surface.blit(text_surf, (radius + y, radius - x))
-            self.surface.blit(text_surf, (radius - y, radius - x))
+        self.surface.blit(text_surf, (radius + x, radius + y))
+        self.surface.blit(text_surf, (radius - x, radius + y))
+        self.surface.blit(text_surf, (radius + x, radius - y))
+        self.surface.blit(text_surf, (radius - x, radius - y))
+        self.surface.blit(text_surf, (radius + y, radius + x))
+        self.surface.blit(text_surf, (radius - y, radius + x))
+        self.surface.blit(text_surf, (radius + y, radius - x))
+        self.surface.blit(text_surf, (radius - y, radius - x))
 
     def update(self):
         # Move the text by adding x and y velocity, bouce off walls.
