@@ -3,10 +3,13 @@
 # Simple Bubble Text Demo (JavaScript - Canvas2D)
 Simple Demo showing how to make Bubble Text using both Polar Coordinates trigonometry Algorithm and Bresenham's Circle Drawing Algorithm. https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
 
-# Run
-You will need Love2D installed to run this.
+# Browser
+    firefox index.html
 
-## ArchLinux instructions.
+# Electron
+You will need to install electron. 
 
-    sudo pacman -S --needed love
-    love .
+Archlinux instructions.
+
+    sudo pacman -S --needed electron
+    electron .
