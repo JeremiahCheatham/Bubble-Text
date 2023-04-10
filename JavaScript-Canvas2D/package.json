@@ -1,0 +1,20 @@
+{
+    "name": "bubble-text",
+    "version": "1.0.0",
+    "description": "Bubble Text",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "files": [
+        "main.js",
+        "index2.html",
+        "style.css"
+    ],
+    "extraFiles": [
+        "package.json"
+    ],
+    "devDependencies": {
+        "electron": "^22.3.0"
+    }
+}
