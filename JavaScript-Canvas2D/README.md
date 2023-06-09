@@ -9,7 +9,7 @@ Simple Demo showing how to make Bubble Text using both Polar Coordinates trigono
 # Electron
 You will need to install electron. 
 
-Archlinux instructions.
+## Archlinux instructions.
 
     sudo pacman -S --needed electron
     electron .
