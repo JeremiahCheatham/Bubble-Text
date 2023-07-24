@@ -8,7 +8,6 @@ public:
     Game();
     ~Game();
 
-    void init();
     void run();
 
     static constexpr int width = 1280;
