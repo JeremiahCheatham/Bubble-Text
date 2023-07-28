@@ -6,6 +6,7 @@ Simple Demo showing how to make Bubble Text using both Polar Coordinates trigono
 # Ports
 [C - SDL2](C-SDL2)\
 [C++ - SDL2](Cpp-SDL2)\
+[Go - SDL2](Go-SDL2)\
 [Haskell - SDL2](Haskell-SDL2)\
 [JavaScript - Canvas2D](JavaScript-Canvas2D)\
 [Python - PyGame](Python-Pygame)\
