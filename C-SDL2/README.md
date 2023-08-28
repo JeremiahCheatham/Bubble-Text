@@ -10,5 +10,4 @@ To build the bubble-text binary you will need all required build tools needed to
 
     sudo pacman -S --needed base-devel
     sudo pacman -S --needed sdl2 sdl2_ttf
-    make
-    ./bubble-text
+    make release run
