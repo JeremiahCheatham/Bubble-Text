@@ -1,19 +1,16 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-// Included header files.
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-// Define directives for constants.
-#define MY_SDL_FLAGS (SDL_INIT_VIDEO|SDL_INIT_TIMER)
-#define TITLE "Bubble Text"
-#define WIDTH 1280
-#define HEIGHT 720
-#define FPS 60
-#define SHOW_FPS false
+#define SDL_FLAGS (SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER)
+#define WINDOW_TITLE "Bubble Text"
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 720
+#define TARGET_FPS 60
 
-#endif // MAIN_H
+#endif

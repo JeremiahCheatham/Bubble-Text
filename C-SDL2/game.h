@@ -3,18 +3,20 @@
 
 #include "main.h"
 #include "bubble_text.h"
+#include "fps.h"
 
 struct Game {
     SDL_Event event;
+    SDL_Window *window;
     SDL_Renderer *renderer;
-    float frame_delay;
-    bool show_fps;
-    float delta_time;
     struct Bubble_Text *bubble_text;
+    struct Fps *fps;
+    bool playing;
+    double delta_time;
 };
 
-struct Game* game_new(SDL_Renderer *renderer);
-bool game_run(struct Game *this);
-void game_free(struct Game *this);
+bool game_new(struct Game **game);
+void game_free(struct Game *g);
+bool game_run(struct Game *g);
 
-#endif // GAME_H
+#endif
