@@ -41,9 +41,10 @@ bool bubble_text_new(
     // Using the outer_color text to stamp in a circle.
 
     // Polar Coordinates trigonometry Algorithm
-    // for (int index = 0; index < (int)(M_PI * radius); index++) {
-    //     int x = (int)(cos(index / (radius / 2.0)) * radius) + radius;
-    //     int y = (int)(sin(index / (radius / 2.0)) * radius) + radius;
+    // for (int index = 0; index < (int)(2 * M_PI * radius); index++) {
+    //     double rad = (double)index / radius;
+    //     int x = (int)(cos(rad) * radius) + radius;
+    //     int y = (int)(sin(rad) * radius) + radius;
     //     SDL_BlitSurface(b->text_surf, NULL, b->target_surf, &(SDL_Rect){x, y, b->text_surf->w, b->text_surf->h });
     // }
 
@@ -91,12 +92,18 @@ bool bubble_text_new(
     return false;
 }
 
-void bubble_text_free(struct Bubble_Text *b) {
-    TTF_CloseFont(b->font);
-    SDL_FreeSurface(b->text_surf);
-    SDL_FreeSurface(b->target_surf);
-    SDL_DestroyTexture(b->image);
-    free(b);
+void bubble_text_free(struct Bubble_Text **bubble_text) {
+    TTF_CloseFont((*bubble_text)->font);
+    (*bubble_text)->font = NULL;
+    SDL_FreeSurface((*bubble_text)->text_surf);
+    (*bubble_text)->text_surf = NULL;
+    SDL_FreeSurface((*bubble_text)->target_surf);
+    (*bubble_text)->target_surf = NULL;
+    SDL_DestroyTexture((*bubble_text)->image);
+    (*bubble_text)->image = NULL;
+    (*bubble_text)->renderer = NULL;
+    free(*bubble_text);
+    *bubble_text = NULL;
 }
 
 void blit_symmetric_points(SDL_Surface *text_surf, SDL_Surface *target_surf, int radius, int x, int y) {

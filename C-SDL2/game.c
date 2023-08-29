@@ -29,14 +29,18 @@ bool game_new(struct Game **game) {
     return false;
 }
 
-void game_free(struct Game *g) {
-    fps_free(g->fps);
-    bubble_text_free(g->bubble_text);
-    SDL_DestroyRenderer(g->renderer);
-    SDL_DestroyWindow(g->window);
+void game_free(struct Game **game) {
+    fps_free(&(*game)->fps);
+    bubble_text_free(&(*game)->bubble_text);
+
+    SDL_DestroyRenderer((*game)->renderer);
+    (*game)->renderer = NULL;
+    SDL_DestroyWindow((*game)->window);
+    (*game)->window = NULL;
     TTF_Quit();
     SDL_Quit();
-    free(g);
+    free(*game);
+    *game = NULL;
 }
 
 bool game_run(struct Game *g) {

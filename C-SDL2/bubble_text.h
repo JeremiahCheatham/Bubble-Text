@@ -26,9 +26,9 @@ bool bubble_text_new(
     SDL_Color outer_color,
     SDL_Color center_color
 );
-void bubble_text_free(struct Bubble_Text *g);
+void bubble_text_free(struct Bubble_Text **bubble_text);
 void blit_symmetric_points(SDL_Surface *text_surf, SDL_Surface *target_surf, int radius, int x, int y);
-void bubble_text_update(struct Bubble_Text *g, double dt);
-bool bubble_text_draw(struct Bubble_Text *g);
+void bubble_text_update(struct Bubble_Text *b, double dt);
+bool bubble_text_draw(struct Bubble_Text *b);
 
 #endif

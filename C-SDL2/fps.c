@@ -18,9 +18,10 @@ bool fps_new(struct Fps **fps) {
     return false;
 }
 
-void fps_free(struct Fps *f) {
-    if (f) {
-        free(f);
+void fps_free(struct Fps **fps) {
+    if (*fps) {
+        free(*fps);
+        *fps = NULL;
     }
 }
 
@@ -63,7 +64,6 @@ double fps_update(struct Fps *f) {
     }
 
     elapsed_time = fps_time_since(f->last_time, &f->last_time);
-    // f->last_time = SDL_GetTicks();
 
     f->carry_delay = delay - elapsed_time;
     if (f->carry_delay > f->cap_delay) {
