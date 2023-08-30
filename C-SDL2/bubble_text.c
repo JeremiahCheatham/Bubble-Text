@@ -1,5 +1,9 @@
 #include "bubble_text.h"
+
 // #include "math.h"
+// #ifndef M_PI
+//     #define M_PI 3.14159265358979323846
+// #endif
 
 bool bubble_text_new(
     struct Bubble_Text **bubble_text,

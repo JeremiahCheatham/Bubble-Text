@@ -1,5 +1,5 @@
 CC				?= gcc
-CFLAGS_BASE		= `pkg-config --cflags sdl2 SDL2_ttf` -std=gnu99
+CFLAGS_BASE		= `pkg-config --cflags sdl2 SDL2_ttf` -std=c99
 CFLAGS_RELEASE	= -O2
 CFLAGS_DEV		= -O0 -ggdb3 -Wall -Wextra -Wwrite-strings -Werror -Wunused -Wuninitialized \
                  -Wconversion -Wshadow -Wformat -Wmissing-prototypes -Wmissing-declarations \
